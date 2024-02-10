@@ -1,0 +1,97 @@
+﻿<r:RibbonWindow x:Class="MusicSteak.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MusicSteak"
+        mc:Ignorable="d"
+        xmlns:vm="clr-namespace:Core;assembly=Core"
+        xmlns:v="clr-namespace:MusicSteak.Views"
+        xmlns:r="urn:fluent-ribbon"
+        Title="{Binding Title}" Height="400" Width="600" WindowStartupLocation="CenterOwner" WindowState="Maximized"
+        d:DataContext="{d:DesignInstance Type=vm:MainViewModel, IsDesignTimeCreatable=False}">
+    <r:RibbonWindow.TitleBackground>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF0A6103"/>
+            <GradientStop Color="#FF0D3103" Offset="1"/>
+        </LinearGradientBrush>
+    </r:RibbonWindow.TitleBackground>
+    <r:RibbonWindow.Background>
+        <RadialGradientBrush>
+            <GradientStop Color="#FF060200"/>
+            <GradientStop Color="#FF061700" Offset="1"/>
+        </RadialGradientBrush>
+    </r:RibbonWindow.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
+        <r:Ribbon Grid.ColumnSpan="2">
+            <r:RibbonTabItem Header="Home">
+                <r:RibbonGroupBox Header="{Binding Title}">
+                    <r:Button Header="Save" />
+                </r:RibbonGroupBox>
+            </r:RibbonTabItem>
+            <r:RibbonTabItem Header="Tools">
+                <r:RibbonGroupBox Header="History">
+                    <r:Button Header="Show" Command="{Binding ShowHistoryCommand}" />
+                    <r:Button Header="Hide" Command="{Binding HideHistoryCommand}" />
+                </r:RibbonGroupBox>
+            </r:RibbonTabItem>
+        </r:Ribbon>
+        <TabControl
+            Grid.Row="1">
+            <TabItem Header="Layer 01" >
+                <Grid >
+                    
+                </Grid>
+            </TabItem>
+            <TabItem Header="Layer 02">
+                <Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Layer 03">
+                <Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Layer 04">
+                <Grid>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <TabControl
+            TabStripPlacement="Right"
+            Grid.Row="1"
+            Grid.Column="1">
+            <TabItem Header="History">
+                <v:HistoryView DataContext="{Binding History}"/>
+            </TabItem>
+            <TabItem Header="Properties">
+                <Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Layers">
+                <Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Chords">
+                <Grid>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+
+    </Grid>
+</r:RibbonWindow>
