@@ -7,16 +7,31 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Localization\Data\cs\History.json" />
+    <None Remove="Localization\Data\cs\Main.json" />
+    <None Remove="Localization\Data\en\History.json" />
+    <None Remove="Localization\Data\en\Main.json" />
+    <None Remove="Localization\Data\History.json" />
+    <None Remove="Localization\Data\Main.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\Data\cs\History.json" />
+    <EmbeddedResource Include="Localization\Data\cs\Main.json" />
+    <EmbeddedResource Include="Localization\Data\en\History.json" />
+    <EmbeddedResource Include="Localization\Data\en\Main.json" />
+    <EmbeddedResource Include="Localization\Data\History.json" />
+    <EmbeddedResource Include="Localization\Data\Main.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Localization\Data\" />
   </ItemGroup>
 
 </Project>

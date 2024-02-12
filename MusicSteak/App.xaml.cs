@@ -1,9 +1,13 @@
-﻿using Core;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using Core;
+using Core.Localization;
+using Core.Messages;
 using Core.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using MusicSteak.Views;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Windows;
 
 namespace MusicSteak
@@ -35,18 +39,25 @@ namespace MusicSteak
         /// </summary>
         private static ServiceProvider ConfigureServices()
         {
-            var services = new ServiceCollection();
+            CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+            var l = currentCulture.Name[0..2];
+            var language = new Language
+            {
+                Current = l switch
+                {
+                    "en" => Lang.English,
+                    "cs" => Lang.Czech,
+                    _ => throw new NotImplementedException()
+                }
+            };
 
-            services.AddSingleton(typeof(HistoryViewModel));
-            services.AddSingleton(typeof(MainViewModel));
+            var services = new ServiceCollection()
+                .AddSingleton<IMessenger, StrongReferenceMessenger>()
+                .AddSingleton(typeof(HistoryViewModel))
+                .AddSingleton(typeof(MainViewModel))
+                .AddSingleton(typeof(Language), language);
 
             return services.BuildServiceProvider();
         }
-
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-        }
     }
-
 }

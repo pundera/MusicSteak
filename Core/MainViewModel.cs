@@ -1,32 +1,46 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using Core.Localization;
+using Core.Localization.Holders;
+using Core.Messages;
 using Core.ViewModels;
+using Core.ViewModels.Base;
 
 namespace Core
 {
-    public partial class MainViewModel: ObservableObject
+    public partial class MainViewModel(HistoryViewModel history, Language language, IMessenger messenger) 
+        : VMBase<LMain>(language, messenger)
     {
-        public MainViewModel(HistoryViewModel history)
-        {
-            History = history;
-        }
+        readonly IMessenger messenger = messenger;
 
-        [ObservableProperty]
-        string title = "Music Steak";
+        public HistoryViewModel History { get; } = history;
+        
+        [RelayCommand]
+        void Undo() { History.Undo(); }
 
         [RelayCommand]
-        void ShowHistory()
+        void Redo() { History.Redo(); }
+
+        [RelayCommand]
+        void English() 
         {
-            History.IsVisible = true;
+            var language = new Language
+            {
+                Current = Lang.English
+            };
+            var message = new LanguageChanged(language);
+            messenger.Send(message);
         }
 
         [RelayCommand]
-        void HideHistory()
+        void Czech() 
         {
-            History.IsVisible = false;
+            var language = new Language
+            {
+                Current = Lang.Czech
+            };
+            var message = new LanguageChanged(language);
+            messenger.Send(message);
         }
-
-        [ObservableProperty]
-        HistoryViewModel history;
     }
 }

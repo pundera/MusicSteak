@@ -3,13 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MusicSteak"
         mc:Ignorable="d"
-        xmlns:vm="clr-namespace:Core;assembly=Core"
         xmlns:v="clr-namespace:MusicSteak.Views"
-        xmlns:r="urn:fluent-ribbon"
-        Title="{Binding Title}" Height="400" Width="600" WindowStartupLocation="CenterOwner" WindowState="Maximized"
-        d:DataContext="{d:DesignInstance Type=vm:MainViewModel, IsDesignTimeCreatable=False}">
+        xmlns:r="urn:fluent-ribbon" 
+        xmlns:core="clr-namespace:Core;assembly=Core"
+        
+                Title="{Binding L.Title}" 
+                Height="400" Width="600" 
+                WindowStartupLocation="CenterOwner" WindowState="Maximized"
+                d:DataContext="{d:DesignInstance Type=core:MainViewModel, IsDesignTimeCreatable=False}">
+
     <r:RibbonWindow.TitleBackground>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FF0A6103"/>
@@ -26,6 +29,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -33,22 +37,29 @@
         </Grid.ColumnDefinitions>
         <r:Ribbon Grid.ColumnSpan="2">
             <r:RibbonTabItem Header="Home">
-                <r:RibbonGroupBox Header="{Binding Title}">
-                    <r:Button Header="Save" />
+                <r:RibbonGroupBox Header="{Binding L.Title}">
+                    <r:Button Header="{Binding L.Save}" />
                 </r:RibbonGroupBox>
             </r:RibbonTabItem>
             <r:RibbonTabItem Header="Tools">
-                <r:RibbonGroupBox Header="History">
-                    <r:Button Header="Show" Command="{Binding ShowHistoryCommand}" />
-                    <r:Button Header="Hide" Command="{Binding HideHistoryCommand}" />
+                <r:RibbonGroupBox Header="{Binding History.L.Title}">
+                    <r:Button Header="Undo" Command="{Binding UndoCommand}" />
+                    <r:Button Header="Redo" Command="{Binding RedoCommand}" />
+                </r:RibbonGroupBox>
+            </r:RibbonTabItem>
+            <r:RibbonTabItem Header="Language">
+                <r:RibbonGroupBox Header="{Binding L.Title}">
+                    <r:Button Header="English" Command="{Binding EnglishCommand}" LargeIcon="pack://application:,,,/MusicSteak;component/Images/english.png" />
+                    <r:Button Header="Česky" Command="{Binding CzechCommand}" LargeIcon="pack://application:,,,/MusicSteak;component/Images/czech.png"/>
                 </r:RibbonGroupBox>
             </r:RibbonTabItem>
         </r:Ribbon>
         <TabControl
+            TabStripPlacement="Left"
             Grid.Row="1">
             <TabItem Header="Layer 01" >
                 <Grid >
-                    
+
                 </Grid>
             </TabItem>
             <TabItem Header="Layer 02">
@@ -72,26 +83,41 @@
             TabStripPlacement="Right"
             Grid.Row="1"
             Grid.Column="1">
-            <TabItem Header="History">
+            <TabItem Header="{Binding L.History}">
                 <v:HistoryView DataContext="{Binding History}"/>
             </TabItem>
-            <TabItem Header="Properties">
+            <TabItem Header="{Binding L.Layers}">
                 <Grid>
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Layers">
+            <TabItem Header="{Binding L.Properties}">
                 <Grid>
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Chords">
+            <TabItem Header="{Binding L.Chords}">
                 <Grid>
 
                 </Grid>
             </TabItem>
         </TabControl>
 
+
+        <StatusBar Grid.Row="2" Grid.ColumnSpan="2" >
+            <StatusBar.Background>
+                <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                    <GradientStop Color="#FFB0F7B7"/>
+                    <GradientStop Color="#FFA7FFA2" Offset="1"/>
+                </LinearGradientBrush>
+            </StatusBar.Background>
+            <StatusBarItem >
+                <TextBlock Margin="0" Padding="0" Foreground="Black" Text="{Binding L.Title}"/>
+            </StatusBarItem>
+            <StatusBarItem />
+            <StatusBarItem />
+            <StatusBarItem />
+        </StatusBar>
 
     </Grid>
 </r:RibbonWindow>

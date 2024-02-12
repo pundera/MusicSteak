@@ -6,14 +6,16 @@
         xmlns:vm="clr-namespace:Core.ViewModels;assembly=Core"
         xmlns:local="clr-namespace:MusicSteak.Views"
         xmlns:c="clr-namespace:MusicSteak.Converters"
-        mc:Ignorable="d"
-        Visibility="{Binding IsVisible, Converter={StaticResource VisibilityConverter}}">
-    <UserControl.DataContext>
-        <vm:HistoryViewModel />
-    </UserControl.DataContext>
+             d:DataContext="{d:DesignInstance Type=vm:HistoryViewModel, IsDesignTimeCreatable=False}"
+        mc:Ignorable="d">
     <Grid>
-        <ListView>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="{Binding L.Title}"/>
+        <ListView
+            Grid.Row="1">
         </ListView>
     </Grid>
     
