@@ -52,10 +52,19 @@ namespace MusicSteak
             };
 
             var services = new ServiceCollection()
+                // Messenger => 
                 .AddSingleton<IMessenger, StrongReferenceMessenger>()
-                .AddSingleton(typeof(HistoryViewModel))
-                .AddSingleton(typeof(MainViewModel))
-                .AddSingleton(typeof(Language), language);
+
+                // Language => 
+                .AddSingleton(language)
+
+                // Tools => 
+                .AddSingleton<HistoryViewModel>()
+                .AddSingleton<PropertiesViewModel>()
+                .AddSingleton<LayersViewModel>()
+
+                // Main Window => 
+                .AddSingleton<MainViewModel>();
 
             return services.BuildServiceProvider();
         }

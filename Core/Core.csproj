@@ -8,18 +8,30 @@
 
   <ItemGroup>
     <None Remove="Localization\Data\cs\History.json" />
+    <None Remove="Localization\Data\cs\Layers.json" />
     <None Remove="Localization\Data\cs\Main.json" />
+    <None Remove="Localization\Data\cs\Properties.json" />
     <None Remove="Localization\Data\en\History.json" />
+    <None Remove="Localization\Data\en\Layers.json" />
     <None Remove="Localization\Data\en\Main.json" />
+    <None Remove="Localization\Data\en\Properties.json" />
     <None Remove="Localization\Data\History.json" />
+    <None Remove="Localization\Data\Layers.json" />
     <None Remove="Localization\Data\Main.json" />
+    <None Remove="Localization\Data\Properties.json" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Localization\Data\cs\History.json" />
+    <EmbeddedResource Include="Localization\Data\cs\Layers.json" />
     <EmbeddedResource Include="Localization\Data\cs\Main.json" />
+    <EmbeddedResource Include="Localization\Data\cs\Properties.json" />
     <EmbeddedResource Include="Localization\Data\en\History.json" />
+    <EmbeddedResource Include="Localization\Data\en\Layers.json" />
     <EmbeddedResource Include="Localization\Data\en\Main.json" />
+    <EmbeddedResource Include="Localization\Data\en\Properties.json" />
+    <EmbeddedResource Include="Localization\Data\Layers.json" />
+    <EmbeddedResource Include="Localization\Data\Properties.json" />
     <EmbeddedResource Include="Localization\Data\History.json" />
     <EmbeddedResource Include="Localization\Data\Main.json" />
   </ItemGroup>

@@ -58,7 +58,7 @@
                                         ContentSource="Header" Margin="1,1,1,2"
                                         RecognizesAccessKey="True">
                                         <ContentPresenter.LayoutTransform>
-                                            <RotateTransform Angle="270" />
+                                            <RotateTransform Angle="0" />
                                         </ContentPresenter.LayoutTransform>
                                     </ContentPresenter>
                                 </Border>

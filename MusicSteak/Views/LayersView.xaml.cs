@@ -1,13 +1,11 @@
-﻿using System.Windows.Controls;
-
-namespace MusicSteak.Views
+﻿namespace MusicSteak.Views
 {
     /// <summary>
     /// Interaction logic for HistoryView.xaml
     /// </summary>
-    public partial class HistoryView
+    public partial class LayersView
     {
-        public HistoryView()
+        public LayersView()
         {
             InitializeComponent();
         }

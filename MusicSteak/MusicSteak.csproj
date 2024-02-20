@@ -7,11 +7,21 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <ApplicationIcon>Images\key.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Images\czech.png" />
     <None Remove="Images\english.png" />
+    <None Remove="Images\key.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\key.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\key.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +38,15 @@
   <ItemGroup>
     <Resource Include="Images\czech.png" />
     <Resource Include="Images\english.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\LayersView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\PropertiesView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

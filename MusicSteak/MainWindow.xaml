@@ -7,16 +7,15 @@
         xmlns:v="clr-namespace:MusicSteak.Views"
         xmlns:r="urn:fluent-ribbon" 
         xmlns:core="clr-namespace:Core;assembly=Core"
-        
-                Title="{Binding L.Title}" 
-                Height="400" Width="600" 
-                WindowStartupLocation="CenterOwner" WindowState="Maximized"
-                d:DataContext="{d:DesignInstance Type=core:MainViewModel, IsDesignTimeCreatable=False}">
-
+        TitleForeground="Black"
+        Height="400" Width="600" 
+        Icon="pack://application:,,,/MusicSteak;component/Images/key.png"
+        WindowStartupLocation="CenterOwner" WindowState="Maximized"
+        d:DataContext="{d:DesignInstance Type=core:MainViewModel, IsDesignTimeCreatable=False}">
     <r:RibbonWindow.TitleBackground>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FF0A6103"/>
-            <GradientStop Color="#FF0D3103" Offset="1"/>
+        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+            <GradientStop Color="#FFB0F7B7"/>
+            <GradientStop Color="#FF376F12" Offset="1"/>
         </LinearGradientBrush>
     </r:RibbonWindow.TitleBackground>
     <r:RibbonWindow.Background>
@@ -40,11 +39,14 @@
                 <r:RibbonGroupBox Header="{Binding L.Title}">
                     <r:Button Header="{Binding L.Save}" />
                 </r:RibbonGroupBox>
+                <r:RibbonGroupBox Header="~~ Notes">
+                    <r:Button Header="~~ Add block" Command="{Binding AddBlockCommand}" />
+                </r:RibbonGroupBox>
             </r:RibbonTabItem>
             <r:RibbonTabItem Header="Tools">
                 <r:RibbonGroupBox Header="{Binding History.L.Title}">
-                    <r:Button Header="Undo" Command="{Binding UndoCommand}" />
-                    <r:Button Header="Redo" Command="{Binding RedoCommand}" />
+                    <r:Button Header="Undo" Command="{Binding History.UndoCommand}" />
+                    <r:Button Header="Redo" Command="{Binding History.RedoCommand}" />
                 </r:RibbonGroupBox>
             </r:RibbonTabItem>
             <r:RibbonTabItem Header="Language">
@@ -54,12 +56,24 @@
                 </r:RibbonGroupBox>
             </r:RibbonTabItem>
         </r:Ribbon>
+       
         <TabControl
-            TabStripPlacement="Left"
+            TabStripPlacement="Top"
             Grid.Row="1">
             <TabItem Header="Layer 01" >
                 <Grid >
-
+                    <ItemsControl ItemsSource="{Binding Blocks}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <v:BlockView DataContext="{Binding .}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </Grid>
             </TabItem>
             <TabItem Header="Layer 02">
@@ -80,21 +94,17 @@
         </TabControl>
 
         <TabControl
-            TabStripPlacement="Right"
+            TabStripPlacement="Top"
             Grid.Row="1"
             Grid.Column="1">
             <TabItem Header="{Binding L.History}">
                 <v:HistoryView DataContext="{Binding History}"/>
             </TabItem>
             <TabItem Header="{Binding L.Layers}">
-                <Grid>
-
-                </Grid>
+                <v:LayersView DataContext="{Binding Layers}"/>
             </TabItem>
             <TabItem Header="{Binding L.Properties}">
-                <Grid>
-
-                </Grid>
+                <v:PropertiesView DataContext="{Binding Properties}"/>
             </TabItem>
             <TabItem Header="{Binding L.Chords}">
                 <Grid>
@@ -104,7 +114,7 @@
         </TabControl>
 
 
-        <StatusBar Grid.Row="2" Grid.ColumnSpan="2" >
+        <r:StatusBar Grid.Row="2" Grid.ColumnSpan="2" >
             <StatusBar.Background>
                 <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
                     <GradientStop Color="#FFB0F7B7"/>
@@ -117,7 +127,7 @@
             <StatusBarItem />
             <StatusBarItem />
             <StatusBarItem />
-        </StatusBar>
+        </r:StatusBar>
 
     </Grid>
 </r:RibbonWindow>
