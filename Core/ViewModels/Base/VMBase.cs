@@ -9,11 +9,14 @@ namespace Core.ViewModels.Base
 {
     public abstract partial class VMBase<TLocalization> : ObservableObject where TLocalization : LBase, new() 
     {
+        protected IMessenger Messenger { get; }
+
         protected VMBase(Language language, IMessenger messenger)
         {
+            Messenger = messenger;
             this.language = language;
             Language = language;
-            messenger.Register(this, (MessageHandler<VMBase<TLocalization>, LanguageChanged>)((vm, message) => { 
+            Messenger.Register(this, (MessageHandler<VMBase<TLocalization>, LanguageChanged>)((vm, message) => { 
                 vm.Language = message.ChangedTo; }));
         }
 

@@ -10,5 +10,7 @@ namespace Core.ViewModels
     public partial class ToolViewModel<LT>(Language language, IMessenger messenger) 
         : VMBase<LT>(language, messenger) where LT : LTool, new()
     {
+        [ObservableProperty]
+        string title = "...";
     }
 }

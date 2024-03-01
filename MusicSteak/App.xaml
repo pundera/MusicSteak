@@ -107,7 +107,10 @@
 
 
             <c:VisibleConverter x:Key="VisibilityConverter" />
-
+            <c:NoteConverter x:Key="NoteConverter" />
+            <c:NoteColorConverter x:Key="NoteColorConverter" />
+            <c:NoteDurationConverter x:Key="NoteDurationConverter" />
+            <c:NoteDurationMarginConverter x:Key="NoteDurationMarginConverter" />
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Fluent;component/Themes/Generic.xaml" />

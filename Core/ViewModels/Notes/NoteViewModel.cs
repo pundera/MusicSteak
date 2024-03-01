@@ -1,18 +1,46 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using Core.Messages;
 
 namespace Core.ViewModels.Notes
 {
-    public partial class NoteViewModel : ObservableObject
+    public partial class NoteViewModel(IMessenger messenger) : ObservableObject
     {
-        [ObservableProperty]
-        double y1 = 0;
+        readonly IMessenger messenger = messenger;
 
         [ObservableProperty]
-        double y2 = 0;
+        int n = 0;
+
+        [ObservableProperty]
+        int duration = 0;
+
+        [ObservableProperty]
+        bool isVisible = true;
+
+        [ObservableProperty]
+        bool isActive = false;
+
+        [RelayCommand]
+        void SwitchVisibility() 
+        {
+            IsVisible = !IsVisible;
+        }
+
+        [RelayCommand]
+        void SwitchIsActive()
+        {
+            if (Duration < 5)
+            {
+                Duration++;
+            }
+            else
+            {
+                Duration = 0;
+            }
+
+            IsActive = !(Duration == 0);
+        }
+
     }
 }

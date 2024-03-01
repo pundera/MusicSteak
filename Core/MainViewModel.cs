@@ -1,12 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Core.Localization;
 using Core.Localization.Holders;
 using Core.Messages;
 using Core.ViewModels;
 using Core.ViewModels.Base;
-using System.Collections.ObjectModel;
 
 namespace Core
 {
@@ -21,16 +19,29 @@ namespace Core
         
         public LayersViewModel Layers { get; } = layers;
 
-        [ObservableProperty]
-        ObservableCollection<BlockViewModel> blocks = [];
+        public BlockViewModel Notes { get; } = new BlockViewModel(messenger);
 
         [RelayCommand]
         void AddBlock()
         {
-            BlockViewModel b = new();
-            Blocks.Add(b);
-            b.Notes.Add(new() { Y1 = 30, Y2 = 30 });
-            b.Notes.Add(new() { Y1 = 50, Y2 = 50 });
+
+            for (int lx = 0; lx < 2; lx++)
+            {
+                var l = new LayerViewModel(language, messenger)
+                {
+                    IsSelected = lx == 0
+                };
+
+                Layers.Layers.Add(l);
+                l.Title = $"{lx} {l.L!.Title}";
+
+                
+                for (int ix = 0; ix < 16; ix++)
+                {
+                    BlockViewModel b = new(messenger);
+                    l.Blocks.Add(b);
+                }
+            }
         }
 
         [RelayCommand]
